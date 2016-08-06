@@ -28,9 +28,24 @@ public abstract class BaseFragment extends Fragment {
                 //注意：此处一定要调运BaseFragment的onCreateSuccessView，否则，栈溢出
                 return BaseFragment.this.onCreateSuccessView();
             }
+
+            @Override
+            public ResultState onLoad() {
+                return BaseFragment.this.onLoad();
+            }
         };
         return mLoadingPage;
     }
     //加载成功的布局必须有子类来实现
     public abstract View onCreateSuccessView();
+
+    //加载网络数据，必须由子类来实现
+    public abstract LoadingPage.ResultState onLoad();
+
+    //开始加载数据
+    public void loadData(){
+        if (mLoadingPage != null){
+            mLoadingPage.loadData();
+        }
+    };
 }
