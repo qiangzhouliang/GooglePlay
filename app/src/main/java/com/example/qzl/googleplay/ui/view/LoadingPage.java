@@ -13,7 +13,7 @@ import com.example.qzl.googleplay.utils.UIUtils;
  * 未加载 - 加载中 - 加载失败 - 数据为空 - 加载成功
  * Created by Qzl on 2016-08-06.
  */
-public class LoadingPage extends FrameLayout {
+public abstract class LoadingPage extends FrameLayout {
     private static final int START_LOAD_UNDO = 1;//啥都不做
     private static final int START_LOAD_LOADING = 2;//加载中
     private static final int START_LOAD_ERROR = 3;//加载失败
@@ -24,6 +24,7 @@ public class LoadingPage extends FrameLayout {
     private View mLoadingPage;//加载中的布局
     private View mErrorPage;
     private View mEmptyPage;
+    private View mSuccessPage;
 
     public LoadingPage(Context context) {
         super(context);
@@ -76,5 +77,18 @@ public class LoadingPage extends FrameLayout {
         mLoadingPage.setVisibility((mCurrentState == START_LOAD_UNDO || mCurrentState == START_LOAD_LOADING) ? VISIBLE : GONE);
         mErrorPage.setVisibility(mCurrentState == START_LOAD_ERROR ? VISIBLE : GONE);
         mEmptyPage.setVisibility(mCurrentState == START_LOAD_EMPTY ? VISIBLE : GONE);
+        //当成功布局为空并且当前状态为空，我们才加载成功布局
+        if (mSuccessPage == null && mCurrentState == START_LOAD_SUCCESS) {
+            mSuccessPage = onCreateSuccessView();
+            if (mSuccessPage != null){
+                addView(mSuccessPage);
+            }
+        }
     }
+
+    /**
+     * 加载成功后显示的布局
+     * @return
+     */
+    public abstract View onCreateSuccessView();
 }

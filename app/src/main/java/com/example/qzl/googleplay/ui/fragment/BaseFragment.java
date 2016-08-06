@@ -12,7 +12,7 @@ import com.example.qzl.googleplay.utils.UIUtils;
 /**
  * Created by Qzl on 2016-08-06.
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     private LoadingPage mLoadingPage;
 
@@ -21,7 +21,16 @@ public class BaseFragment extends Fragment {
 //        TextView view = new TextView(UIUtils.getContext());
 //        //使用TextView显示当前类的类名
 //        view.setText(getClass().getSimpleName());
-        mLoadingPage = new LoadingPage(UIUtils.getContext());
+        mLoadingPage = new LoadingPage(UIUtils.getContext()){
+
+            @Override
+            public View onCreateSuccessView() {
+                //注意：此处一定要调运BaseFragment的onCreateSuccessView，否则，栈溢出
+                return BaseFragment.this.onCreateSuccessView();
+            }
+        };
         return mLoadingPage;
     }
+    //加载成功的布局必须有子类来实现
+    public abstract View onCreateSuccessView();
 }
