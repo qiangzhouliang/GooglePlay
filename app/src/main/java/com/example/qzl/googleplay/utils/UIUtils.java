@@ -1,6 +1,7 @@
 package com.example.qzl.googleplay.utils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
@@ -10,7 +11,7 @@ import com.example.qzl.googleplay.global.GoogleApplication;
 /**
  * Created by Qzl on 2016-08-06.
  */
-public class UIUTtils {
+public class UIUtils {
     /**
      * 获取context的方法
      * @return
@@ -48,7 +49,10 @@ public class UIUTtils {
     public static int getDimen(int id){
         return getContext().getResources().getDimensionPixelSize(id);//返回集体的像素值
     }
-
+    //根据id获取颜色的状态选择器
+    public static ColorStateList getColorStateList(int id){
+        return getContext().getResources().getColorStateList(id);
+    }
     ///////////////////////dp和px的转换/////////////////////////////////
     public static int dip2px(float dip){
         float density = getContext().getResources().getDisplayMetrics().density;//获得设备密度
@@ -83,4 +87,5 @@ public class UIUTtils {
             getHandler().post(r);
         }
     }
+
 }

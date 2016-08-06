@@ -1,8 +1,13 @@
-package com.example.qzl.googleplay;
+package com.example.qzl.googleplay.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.qzl.googleplay.R;
+
+/**
+ * 主页面
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
