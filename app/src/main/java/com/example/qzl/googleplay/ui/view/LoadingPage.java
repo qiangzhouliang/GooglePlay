@@ -10,7 +10,7 @@ import com.example.qzl.googleplay.utils.UIUtils;
 
 /**
  * 根据当前状态来显示不同页面的自定义控件
- *  未加载 - 加载中 - 加载失败 - 数据为空 - 加载成功
+ * 未加载 - 加载中 - 加载失败 - 数据为空 - 加载成功
  * Created by Qzl on 2016-08-06.
  */
 public class LoadingPage extends FrameLayout {
@@ -22,6 +22,8 @@ public class LoadingPage extends FrameLayout {
 
     private int mCurrentState = START_LOAD_UNDO;//表示当前状态
     private View mLoadingPage;//加载中的布局
+    private View mErrorPage;
+    private View mEmptyPage;
 
     public LoadingPage(Context context) {
         super(context);
@@ -48,5 +50,31 @@ public class LoadingPage extends FrameLayout {
             mLoadingPage = UIUtils.inflate(R.layout.page_loading);
             addView(mLoadingPage);//将加载中的布局添加给当前的帧布局
         }
+        //初始化加载失败布局
+        if (mErrorPage == null) {
+            mErrorPage = UIUtils.inflate(R.layout.page_error);
+            addView(mErrorPage);
+        }
+        //初始化数据为空的布局
+        if (mEmptyPage == null) {
+            mEmptyPage = UIUtils.inflate(R.layout.page_empty);
+            addView(mEmptyPage);
+        }
+
+        showRightPage();
+    }
+
+    /**
+     * 根据当前状态决定显示那个布局
+     */
+    private void showRightPage() {
+        /*if (mCurrentState == START_LOAD_UNDO || mCurrentState == START_LOAD_LOADING){
+            mLoadingPage.setVisibility(VISIBLE);
+        }else {
+            mLoadingPage.setVisibility(GONE);
+        }*/
+        mLoadingPage.setVisibility((mCurrentState == START_LOAD_UNDO || mCurrentState == START_LOAD_LOADING) ? VISIBLE : GONE);
+        mErrorPage.setVisibility(mCurrentState == START_LOAD_ERROR ? VISIBLE : GONE);
+        mEmptyPage.setVisibility(mCurrentState == START_LOAD_EMPTY ? VISIBLE : GONE);
     }
 }
