@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,30 +17,31 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="3dp">
             <ImageView
                 android:id="@+id/iv_lih_icon"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
                 android:src="@drawable/ic_default"
-                android:layout_marginRight="5dp"
-                android:layout_centerVertical="true"/>
+                />
             <TextView
                 android:id="@+id/tv_lih_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv_lih_icon"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="#000"
                 android:text="应用名称"/>
 
             <RatingBar
                 android:id="@+id/rb_lih_star"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_height="16dp"
                 android:layout_below="@id/tv_lih_name"
                 android:rating="2.5"
                 android:layout_marginTop="5dp"
+                android:isIndicator="true"
                 android:progressDrawable="@drawable/custom_ratingbar"
                 android:layout_toRightOf="@id/iv_lih_icon"/>
             <TextView
@@ -48,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv_lih_icon"
                 android:layout_below="@id/rb_lih_star"
-                android:textSize="16sp"
-                android:textColor="#8000"
+                android:textSize="15sp"
+                android:textColor="#9e9e9e"
                 android:text="3.70MB"/>
 
             <LinearLayout
@@ -59,7 +61,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginRight="10dp">
+                >
                 <ImageView
                     android:id="@+id/iv_lih_download"
                     android:layout_width="wrap_content"
