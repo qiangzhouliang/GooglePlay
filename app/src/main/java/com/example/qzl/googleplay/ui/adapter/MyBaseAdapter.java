@@ -141,4 +141,9 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
     //加载更多数据，必须由子类实现
     public abstract ArrayList<T> onLoadMore();
+
+    //获取当前集合的大小
+    public int getListSize(){
+        return data.size();
+    }
 }

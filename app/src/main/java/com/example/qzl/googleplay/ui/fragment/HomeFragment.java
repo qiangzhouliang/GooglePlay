@@ -1,9 +1,10 @@
 package com.example.qzl.googleplay.ui.fragment;
 
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.qzl.googleplay.domian.AppInfo;
+import com.example.qzl.googleplay.http.protovol.HomeProtocal;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
 import com.example.qzl.googleplay.ui.holder.HomeHolder;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
  * Created by Qzl on 2016-08-06.
  */
 public class HomeFragment extends BaseFragment {
-    private ArrayList<String> data;
+    //private ArrayList<String> data;
+    private ArrayList<AppInfo> data;
 
     //如果加载数据成功，就回调此方法,此方法在主线程
     @Override
@@ -34,32 +36,39 @@ public class HomeFragment extends BaseFragment {
     @Override
     public LoadingPage.ResultState onLoad() {
         //请求网络，HttpClient, HttpUrlConnection, XUtils
-        data = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            data.add("测试数据："+i);
-        }
-        return LoadingPage.ResultState.STATE_SUCCESS;
+//        data = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            data.add("测试数据："+i);
+//        }
+        HomeProtocal protocal = new HomeProtocal();
+        data = protocal.getData(0);//加载第一页数据
+        System.out.println("data = "+data);
+        return check(data);//校验数据并返回
     }
 
-    class HomeAdapter extends MyBaseAdapter<String>{
+    class HomeAdapter extends MyBaseAdapter<AppInfo>{
 
-        public HomeAdapter(ArrayList<String> data) {
+        public HomeAdapter(ArrayList<AppInfo> data) {
             super(data);
         }
         //返回具体的holder对象
         @Override
-        public BaseHolder<String> getHolder() {
+        public BaseHolder<AppInfo> getHolder() {
             return new HomeHolder();
         }
 
         //此方法在子线程
         @Override
-        public ArrayList<String> onLoadMore() {
-            ArrayList<String> moreData = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                moreData.add("测试更多数据："+i);
-            }
-            SystemClock.sleep(2000);
+        public ArrayList<AppInfo> onLoadMore() {
+//            ArrayList<AppInfo> moreData = new ArrayList<>();
+//            for (int i = 0; i < 10; i++) {
+//                moreData.add("测试更多数据："+i);
+//            }
+//            SystemClock.sleep(2000);
+            HomeProtocal protocal = new HomeProtocal();
+            //20,40,60
+            //下一页数据位置等于当前集合的大小
+            ArrayList<AppInfo> moreData = protocal.getData(getListSize());
             return moreData;
         }
         //        @Override

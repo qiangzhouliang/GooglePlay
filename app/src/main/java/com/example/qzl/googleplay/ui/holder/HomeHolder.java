@@ -4,13 +4,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.qzl.googleplay.R;
+import com.example.qzl.googleplay.domian.AppInfo;
 import com.example.qzl.googleplay.utils.UIUtils;
 
 /**
  * 首页holder
  * Created by Qzl on 2016-08-07.
  */
-public class HomeHolder extends BaseHolder<String> {
+public class HomeHolder extends BaseHolder<AppInfo> {
 
     private TextView mTvContent;
 
@@ -24,8 +25,8 @@ public class HomeHolder extends BaseHolder<String> {
     }
 
     @Override
-    public void refreshView(String data) {
-        mTvContent.setText(data);
+    public void refreshView(AppInfo data) {
+        mTvContent.setText(data.name);
     }
 
 }

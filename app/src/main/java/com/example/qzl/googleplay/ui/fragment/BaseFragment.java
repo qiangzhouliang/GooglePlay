@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.UIUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by Qzl on 2016-08-06.
  */
@@ -48,4 +50,19 @@ public abstract class BaseFragment extends Fragment {
             mLoadingPage.loadData();
         }
     };
+
+    //对网络返回数据的合法性进行校验
+    public LoadingPage.ResultState check(Object obj){
+        if (obj != null){
+            if (obj instanceof ArrayList){//判断是否是集合
+                ArrayList list = (ArrayList) obj;
+                if (list.isEmpty()){
+                    return LoadingPage.ResultState.STATE_EMPTY;
+                }else {
+                    return LoadingPage.ResultState.STATE_SUCCESS;
+                }
+            }
+        }
+        return LoadingPage.ResultState.STATE_ERROR;//表示失败
+    }
 }

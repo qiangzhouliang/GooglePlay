@@ -20,6 +20,7 @@ public abstract class BaseProtocal<T> {
     public T getData(int index) {
         //先判断是否有缓存，有的话就加载缓存
         String result = getCache(index);
+        System.out.println("result11 : ="+result);
         if (StringUtils.isEmpty(result)) {
             //如果没有缓存或缓存失效，请求服务器
             result = getDataFromServer(index);
@@ -37,9 +38,10 @@ public abstract class BaseProtocal<T> {
     private String getDataFromServer(int index) {
         //http://www.itheima.com/home?index=0&name=zhangsan&age=18
         HttpHelper.HttpResult httpResult = HttpHelper.get(HttpHelper.URL + getKey() + "?index=" + index + getParams());
+        System.out.println("httpResule : = "+httpResult);
         if (httpResult != null) {
             String result = httpResult.getString();
-            System.out.println("访问结果：" + result);
+            System.out.println("访问结果：= " + result);
             //写缓存
             if (!StringUtils.isEmpty(result)){
                 setCache(index,result);
