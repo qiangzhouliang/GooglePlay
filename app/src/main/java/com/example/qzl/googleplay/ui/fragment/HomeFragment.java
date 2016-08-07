@@ -1,12 +1,11 @@
 package com.example.qzl.googleplay.ui.fragment;
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.qzl.googleplay.R;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
+import com.example.qzl.googleplay.ui.holder.BaseHolder;
+import com.example.qzl.googleplay.ui.holder.HomeHolder;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.UIUtils;
 
@@ -46,24 +45,33 @@ public class HomeFragment extends BaseFragment {
         public HomeAdapter(ArrayList<String> data) {
             super(data);
         }
+        //返回具体的holder对象
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null){
-                convertView = UIUtils.inflate(R.layout.list_item_home);
-                holder = new ViewHolder();
-                holder.tvContent = (TextView) convertView.findViewById(R.id.tv_lih_context);
-                convertView.setTag(holder);
-            }else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            String content = getItem(position);
-            holder.tvContent.setText(content);
-            return convertView;
+        public BaseHolder<String> getHolder() {
+            return new HomeHolder();
         }
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            ViewHolder holder;
+//            if (convertView == null){
+//                //1 加载布局文件
+//                convertView = UIUtils.inflate(R.layout.list_item_home);
+//                holder = new ViewHolder();
+//                //2 初始化控件 findViewById
+//                holder.tvContent = (TextView) convertView.findViewById(R.id.tv_lih_context);
+//                //3 打一个标记
+//                convertView.setTag(holder);
+//            }else {
+//                holder = (ViewHolder) convertView.getTag();
+//            }
+//            //4 根据数据来刷新界面
+//            String content = getItem(position);
+//            holder.tvContent.setText(content);
+//            return convertView;
+//        }
     }
 
-    static class ViewHolder{
-        public TextView tvContent;
-    }
+//    static class ViewHolder{
+//        public TextView tvContent;
+//    }
 }
