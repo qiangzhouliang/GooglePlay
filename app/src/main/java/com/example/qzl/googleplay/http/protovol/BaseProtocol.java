@@ -2,6 +2,7 @@ package com.example.qzl.googleplay.http.protovol;
 
 import com.example.qzl.googleplay.http.HttpHelper;
 import com.example.qzl.googleplay.utils.IOUtils;
+import com.example.qzl.googleplay.utils.LogUtils;
 import com.example.qzl.googleplay.utils.StringUtils;
 import com.example.qzl.googleplay.utils.UIUtils;
 
@@ -15,12 +16,12 @@ import java.io.IOException;
  * 访问网络的基类
  * Created by Qzl on 2016-08-07.
  */
-public abstract class BaseProtocal<T> {
+public abstract class BaseProtocol<T> {
 
     public T getData(int index) {
         //先判断是否有缓存，有的话就加载缓存
         String result = getCache(index);
-        System.out.println("result11 : ="+result);
+        LogUtils.e("resulte: "+result);
         if (StringUtils.isEmpty(result)) {
             //如果没有缓存或缓存失效，请求服务器
             result = getDataFromServer(index);

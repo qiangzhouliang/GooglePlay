@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 首页网络数据解析
  * Created by Qzl on 2016-08-07.
  */
-public class HomeProtocal extends BaseProtocal<ArrayList<AppInfo>> {
+public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
     @Override
     public String getKey() {
         return "home";

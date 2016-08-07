@@ -20,13 +20,13 @@ public class HomeHolder extends BaseHolder<AppInfo> {
         //1 加载布局
         View view = UIUtils.inflate(R.layout.list_item_home);
         //2 初始化控件
-        mTvContent = (TextView) view.findViewById(R.id.tv_lih_context);
+        //mTvContent = (TextView) view.findViewById(R.id.tv_lih_context);
         return view;
     }
 
     @Override
     public void refreshView(AppInfo data) {
-        mTvContent.setText(data.name);
+        //mTvContent.setText(data.name);
     }
 
 }
