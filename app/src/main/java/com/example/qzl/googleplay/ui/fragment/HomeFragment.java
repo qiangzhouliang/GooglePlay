@@ -33,7 +33,7 @@ public class HomeFragment extends BaseFragment {
     //运行在子线程,可以直接执行耗时网络操作
     @Override
     public LoadingPage.ResultState onLoad() {
-        //请求网络
+        //请求网络，HttpClient, HttpUrlConnection, XUtils
         data = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             data.add("测试数据："+i);

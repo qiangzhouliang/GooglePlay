@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
+    //注意：此处必须从零开始写
     private static final int TYPE_NOMAL = 0;//正常类型
     private static final int TYPE_MORE = 1;//加载更多类型
 
