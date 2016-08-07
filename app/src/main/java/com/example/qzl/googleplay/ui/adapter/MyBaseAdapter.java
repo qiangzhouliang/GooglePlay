@@ -3,9 +3,11 @@ package com.example.qzl.googleplay.ui.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
 import com.example.qzl.googleplay.ui.holder.MoreHolder;
+import com.example.qzl.googleplay.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -69,7 +71,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
             //判断是否是加载更多的类型
             if (getItemViewType(position) == TYPE_MORE){
                 //加载更多
-                holder = new MoreHolder();
+                holder = new MoreHolder(hasMore());
             }else {
                 holder = getHolder();//子类返回具体对象
             }
@@ -81,10 +83,61 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
             holder.setData(getItem(position));
         }else {
             //加载更多布局的数据
-
+            //一旦加载更多布局显示出来，就开始加载更多
+            //只有在有更多数据的状态下，才加载更多
+            MoreHolder moreHolder = (MoreHolder) holder;
+            if (moreHolder.getData() == MoreHolder.STATE_MORE_MORE) {
+                loadMore(moreHolder);
+            }
         }
         return holder.getRootView();
     }
+
+    //子类可以重写此方法来决定是否可以加载更多
+    public boolean hasMore(){
+        return true;//默认都是有更多数据的
+    }
     //返回当前页面的holder对象，必须子类实现
     public abstract BaseHolder<T> getHolder();
+
+    private boolean isLoadMore = false;//标记是否正在加载更多
+    //加载更多数据
+    public void loadMore(final MoreHolder holder){
+        if (!isLoadMore) {
+            isLoadMore = true;
+            new Thread() {
+                @Override
+                public void run() {
+                    //拿到数据
+                    final ArrayList<T> moreData = onLoadMore();
+                    UIUtils.runOnUIThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (moreData != null) {
+                                //每一页有20条数据，如果返回的数据小于20条，就认为没有更多数据了，到了最后一页
+                                if (moreData.size() < 20) {
+                                    holder.setData(MoreHolder.STATE_MORE_NONE);
+                                    Toast.makeText(UIUtils.getContext(), "没有更多数据了", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //还有更多数据
+                                    holder.setData(MoreHolder.STATE_MORE_MORE);
+                                }
+                                //将更多数据追加到当前集合中
+                                data.addAll(moreData);
+                                //刷新界面
+                                MyBaseAdapter.this.notifyDataSetChanged();
+                            } else {
+                                //加载更多失败
+                                holder.setData(MoreHolder.STATE_MORE_ERROR);
+                            }
+                            isLoadMore = false;
+                        }
+                    });
+                }
+            }.start();
+        }
+    }
+
+    //加载更多数据，必须由子类实现
+    public abstract ArrayList<T> onLoadMore();
 }

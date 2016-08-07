@@ -1,5 +1,6 @@
 package com.example.qzl.googleplay.ui.fragment;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.ListView;
 
@@ -50,7 +51,18 @@ public class HomeFragment extends BaseFragment {
         public BaseHolder<String> getHolder() {
             return new HomeHolder();
         }
-//        @Override
+
+        //此方法在子线程
+        @Override
+        public ArrayList<String> onLoadMore() {
+            ArrayList<String> moreData = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                moreData.add("测试更多数据："+i);
+            }
+            SystemClock.sleep(2000);
+            return moreData;
+        }
+        //        @Override
 //        public View getView(int position, View convertView, ViewGroup parent) {
 //            ViewHolder holder;
 //            if (convertView == null){
