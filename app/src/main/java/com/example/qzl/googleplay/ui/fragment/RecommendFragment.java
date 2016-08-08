@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qzl.googleplay.http.protovol.RecommendProtocol;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
+import com.example.qzl.googleplay.ui.view.fly.ShakeListener;
 import com.example.qzl.googleplay.ui.view.fly.StellarMap;
 import com.example.qzl.googleplay.utils.UIUtils;
 
@@ -23,7 +25,7 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     public View onCreateSuccessView() {
-        StellarMap stellar = new StellarMap(UIUtils.getContext());
+        final StellarMap stellar = new StellarMap(UIUtils.getContext());
         stellar.setAdapter(new RecommendAdapter());
         //随机的方式,将控件划分为9行6列的随机方式
         stellar.setRegularity(6, 9);
@@ -32,6 +34,13 @@ public class RecommendFragment extends BaseFragment {
         stellar.setInnerPadding(padding, padding, padding, padding);
         //设置默认页面,第一组数据
         stellar.setGroup(0, true);
+        ShakeListener shake = new ShakeListener(UIUtils.getContext());
+        shake.setOnShakeListener(new ShakeListener.OnShakeListener() {
+            @Override
+            public void onShake() {
+                stellar.zoomIn();//跳到下一页数据
+            }
+        });
         return stellar;
     }
 
@@ -66,7 +75,7 @@ public class RecommendFragment extends BaseFragment {
         public View getView(int group, int position, View convertView) {
             //因为position每组都会从0开始，所以需要将前面几组数据的个数加起来，才能确定确定当前组数据的角标位置
             position += (group) * getCount(group - 1);
-            String keyword = mData.get(position);
+            final String keyword = mData.get(position);
             TextView view = new TextView(UIUtils.getContext());
             view.setText(keyword);
             //随机大小(16-25之间)
@@ -79,6 +88,14 @@ public class RecommendFragment extends BaseFragment {
             int g = 30 + random.nextInt(200);
             int b = 30 + random.nextInt(200);
             view.setTextColor(Color.rgb(r,g,b));
+
+            //TextView的点击事件
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(UIUtils.getContext(), keyword, Toast.LENGTH_SHORT).show();
+                }
+            });
             return view;
         }
 
