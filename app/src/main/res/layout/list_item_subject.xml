@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:qzl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,24 +9,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/list_item_bg_selecter"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:background="@drawable/list_item_bg_selecter"
         android:orientation="vertical">
-        <ImageView
-            android:id="@+id/iv_lis_pic"
+        <!--RatioLayout: 按照比你设置
+            qzl:ratio="2.43":宽高逼按照2.43来执行-->
+        <com.example.qzl.googleplay.ui.view.RatioLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/subject_default"/>
+            android:layout_height="wrap_content"
+            qzl:ratio="2.43">
+
+            <ImageView
+                android:id="@+id/iv_lis_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/subject_default"/>
+        </com.example.qzl.googleplay.ui.view.RatioLayout>
+
         <TextView
             android:id="@+id/tv_lis_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="标题"
             android:padding="5dp"
+            android:text="标题"
             android:textColor="#000"
             android:textSize="18sp"/>
-
     </LinearLayout>
 </LinearLayout>
