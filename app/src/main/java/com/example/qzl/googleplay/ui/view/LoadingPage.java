@@ -3,6 +3,7 @@ package com.example.qzl.googleplay.ui.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.qzl.googleplay.R;
@@ -54,6 +55,15 @@ public abstract class LoadingPage extends FrameLayout {
         //初始化加载失败布局
         if (mErrorPage == null) {
             mErrorPage = UIUtils.inflate(R.layout.page_error);
+            //点击重试事件
+            Button btnRetry = (Button) mErrorPage.findViewById(R.id.btn_pe_retry);
+            btnRetry.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //重新加载数据
+                    loadData();
+                }
+            });
             addView(mErrorPage);
         }
         //初始化数据为空的布局

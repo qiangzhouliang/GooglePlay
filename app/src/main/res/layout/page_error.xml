@@ -13,6 +13,7 @@
         android:src="@drawable/ic_error_page"/>
 
     <Button
+        android:id="@+id/btn_pe_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="加载失败，请重试"
@@ -20,6 +21,5 @@
         android:paddingRight="10dp"
         android:layout_marginTop="5dp"
         android:textColor="#000"
-        android:id="@+id/button"
         android:background="@drawable/btn_load_error_selecter"/>
 </LinearLayout>
