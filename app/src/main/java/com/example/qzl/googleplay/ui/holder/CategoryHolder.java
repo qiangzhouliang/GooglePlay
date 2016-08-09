@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qzl.googleplay.R;
 import com.example.qzl.googleplay.domian.CategoryInfo;
@@ -15,7 +16,7 @@ import com.lidroid.xutils.BitmapUtils;
 /**
  * Created by Qzl on 2016-08-09.
  */
-public class CategoryHolder extends BaseHolder<CategoryInfo> {
+public class CategoryHolder extends BaseHolder<CategoryInfo> implements View.OnClickListener{
 
     private TextView mTvName1, mTvName2, mTvName3;
     private ImageView mIvIcon1, mIvIcon2, mIvIcon3;
@@ -37,6 +38,10 @@ public class CategoryHolder extends BaseHolder<CategoryInfo> {
         mLlGrid2 = (LinearLayout) view.findViewById(R.id.ll_grid2);
         mLlGrid3 = (LinearLayout) view.findViewById(R.id.ll_grid3);
 
+        mLlGrid1.setOnClickListener(this);
+        mLlGrid2.setOnClickListener(this);
+        mLlGrid3.setOnClickListener(this);
+
         mBitmapUtils = BitmapHelper.getBitmapUtils();
         return view;
     }
@@ -50,5 +55,21 @@ public class CategoryHolder extends BaseHolder<CategoryInfo> {
         mBitmapUtils.display(mIvIcon1, HttpHelper.URL + "image?name=" + data.url1);
         mBitmapUtils.display(mIvIcon2, HttpHelper.URL + "image?name=" + data.url2);
         mBitmapUtils.display(mIvIcon3, HttpHelper.URL + "image?name=" + data.url3);
+    }
+
+    @Override
+    public void onClick(View v) {
+        CategoryInfo data = getData();
+        switch (v.getId()){
+            case R.id.ll_grid1:
+                Toast.makeText(UIUtils.getContext(), data.name1, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_grid2:
+                Toast.makeText(UIUtils.getContext(), data.name2, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_grid3:
+                Toast.makeText(UIUtils.getContext(), data.name3, Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

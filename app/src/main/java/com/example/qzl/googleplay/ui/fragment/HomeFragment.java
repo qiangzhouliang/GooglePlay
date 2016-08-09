@@ -6,6 +6,7 @@ import com.example.qzl.googleplay.domian.AppInfo;
 import com.example.qzl.googleplay.http.protocol.HomeProtocal;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
+import com.example.qzl.googleplay.ui.holder.HomeHeaderHolder;
 import com.example.qzl.googleplay.ui.holder.HomeHolder;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.ui.view.MyListView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class HomeFragment extends BaseFragment {
     //private ArrayList<String> data;
     private ArrayList<AppInfo> data;
+    private ArrayList<String> mPicteureList;
 
     //如果加载数据成功，就回调此方法,此方法在主线程
     @Override
@@ -28,7 +30,14 @@ public class HomeFragment extends BaseFragment {
 //        //使用TextView显示当前类的类名
 //        view.setText(getClass().getSimpleName());
         MyListView view = new MyListView(UIUtils.getContext());
+        //给listView增加头布局展示轮播条
+        HomeHeaderHolder header = new HomeHeaderHolder();
+        view.addHeaderView(header.getRootView());//先添加头布局，在设置adapter
         view.setAdapter(new HomeAdapter(data));
+
+        if (mPicteureList != null){
+            header.setData(mPicteureList);
+        }
         return view;
     }
 
@@ -42,6 +51,9 @@ public class HomeFragment extends BaseFragment {
 //        }
         HomeProtocal protocal = new HomeProtocal();
         data = protocal.getData(0);//加载第一页数据
+
+        mPicteureList = protocal.getPicteureList();
+
         System.out.println("data = "+data);
         return check(data);//校验数据并返回
     }

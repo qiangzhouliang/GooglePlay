@@ -13,6 +13,9 @@ import java.util.ArrayList;
  * Created by Qzl on 2016-08-07.
  */
 public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
+
+    private ArrayList<String> mPicture;
+
     @Override
     public String getKey() {
         return "home";
@@ -47,7 +50,7 @@ public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
             }
             //初始化轮播条的数据
             JSONArray ja1 = jo.getJSONArray("picture");
-            ArrayList<String> mPicture = new ArrayList<>();
+            mPicture = new ArrayList<>();
             for (int i = 0; i < ja1.length(); i++) {
                 mPicture.add(ja1.getString(i));
             }
@@ -57,5 +60,9 @@ public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ArrayList<String> getPicteureList(){
+        return mPicture;
     }
 }
