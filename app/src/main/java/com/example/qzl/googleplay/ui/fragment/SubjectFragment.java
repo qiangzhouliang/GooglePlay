@@ -3,7 +3,7 @@ package com.example.qzl.googleplay.ui.fragment;
 import android.view.View;
 
 import com.example.qzl.googleplay.domian.SubjectInfo;
-import com.example.qzl.googleplay.http.protovol.SubjectProtocol;
+import com.example.qzl.googleplay.http.protocol.SubjectProtocol;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
 import com.example.qzl.googleplay.ui.holder.SubjectHolder;
@@ -42,7 +42,7 @@ public class SubjectFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<SubjectInfo> getHolder() {
+        public BaseHolder<SubjectInfo> getHolder(int position) {
             return new SubjectHolder();
         }
 

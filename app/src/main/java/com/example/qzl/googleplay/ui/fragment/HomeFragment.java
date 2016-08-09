@@ -3,7 +3,7 @@ package com.example.qzl.googleplay.ui.fragment;
 import android.view.View;
 
 import com.example.qzl.googleplay.domian.AppInfo;
-import com.example.qzl.googleplay.http.protovol.HomeProtocal;
+import com.example.qzl.googleplay.http.protocol.HomeProtocal;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
 import com.example.qzl.googleplay.ui.holder.HomeHolder;
@@ -53,7 +53,7 @@ public class HomeFragment extends BaseFragment {
         }
         //返回具体的holder对象
         @Override
-        public BaseHolder<AppInfo> getHolder() {
+        public BaseHolder<AppInfo> getHolder(int position) {
             return new HomeHolder();
         }
 

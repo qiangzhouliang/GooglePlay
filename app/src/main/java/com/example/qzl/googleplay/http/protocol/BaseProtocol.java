@@ -1,4 +1,4 @@
-package com.example.qzl.googleplay.http.protovol;
+package com.example.qzl.googleplay.http.protocol;
 
 import com.example.qzl.googleplay.http.HttpHelper;
 import com.example.qzl.googleplay.utils.IOUtils;

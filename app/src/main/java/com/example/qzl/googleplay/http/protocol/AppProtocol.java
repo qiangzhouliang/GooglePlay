@@ -1,4 +1,4 @@
-package com.example.qzl.googleplay.http.protovol;
+package com.example.qzl.googleplay.http.protocol;
 
 import com.example.qzl.googleplay.domian.AppInfo;
 
@@ -9,29 +9,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * 首页网络数据解析
- * Created by Qzl on 2016-08-07.
+ * 应用网络请求
+ * Created by Qzl on 2016-08-08.
  */
-public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
+public class AppProtocol extends BaseProtocol<ArrayList<AppInfo>> {
     @Override
     public String getKey() {
-        return "home";
+        return "app";
     }
 
     @Override
     public String getParams() {
-        return "";//如果没有参数，就传空串，不要传null
+        return "";
     }
 
     @Override
     public ArrayList<AppInfo> parseData(String result) {
-        //Gson， JsonObject
-        //使用JsonObject解析方式：如果遇到{}。就是JsonObject,如果遇到[]，就是JsonArray
         try {
-            JSONObject jo = new JSONObject(result);
-            JSONArray ja = jo.getJSONArray("list");
-            //解析应用列表数据
-            ArrayList<AppInfo> appInfoList = new ArrayList<>();
+            JSONArray ja = new JSONArray(result);
+            ArrayList<AppInfo> list = new ArrayList<>();
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject jo1 = ja.getJSONObject(i);
                 AppInfo info = new AppInfo();
@@ -43,16 +39,9 @@ public class HomeProtocal extends BaseProtocol<ArrayList<AppInfo>> {
                 info.packageName = jo1.getString("packageName");
                 info.size = jo1.getLong("size");
                 info.stars = (float) jo1.getDouble("stars");
-                appInfoList.add(info);
+                list.add(info);
             }
-            //初始化轮播条的数据
-            JSONArray ja1 = jo.getJSONArray("picture");
-            ArrayList<String> mPicture = new ArrayList<>();
-            for (int i = 0; i < ja1.length(); i++) {
-                mPicture.add(ja1.getString(i));
-            }
-
-            return appInfoList;
+            return list;
         } catch (JSONException e) {
             e.printStackTrace();
         }

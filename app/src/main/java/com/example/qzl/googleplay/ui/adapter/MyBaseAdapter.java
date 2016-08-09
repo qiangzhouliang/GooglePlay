@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
     //注意：此处必须从零开始写
-    private static final int TYPE_NOMAL = 0;//正常类型
-    private static final int TYPE_MORE = 1;//加载更多类型
+    private static final int TYPE_NOMAL = 1;//正常类型
+    private static final int TYPE_MORE = 0;//加载更多类型
 
     private ArrayList<T> data;
     public MyBaseAdapter(ArrayList<T> data){
@@ -54,11 +54,11 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
             //最后一个
             return TYPE_MORE;
         }else {
-            return getInnerType();
+            return getInnerType(position);
         }
     }
     //子类可以重写此方法来更改返回的布局类型
-    public int getInnerType(){
+    public int getInnerType(int position){
         return TYPE_NOMAL;//默认就是普通类型
     }
 
@@ -74,7 +74,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
                 //加载更多
                 holder = new MoreHolder(hasMore());
             }else {
-                holder = getHolder();//子类返回具体对象
+                holder = getHolder(position);//子类返回具体对象
             }
         }else {
             holder = (BaseHolder) convertView.getTag();
@@ -99,7 +99,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
         return true;//默认都是有更多数据的
     }
     //返回当前页面的holder对象，必须子类实现
-    public abstract BaseHolder<T> getHolder();
+    public abstract BaseHolder<T> getHolder(int position);
 
     private boolean isLoadMore = false;//标记是否正在加载更多
     //加载更多数据

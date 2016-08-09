@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.qzl.googleplay.http.protovol.RecommendProtocol;
+import com.example.qzl.googleplay.http.protocol.RecommendProtocol;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.ui.view.fly.ShakeListener;
 import com.example.qzl.googleplay.ui.view.fly.StellarMap;

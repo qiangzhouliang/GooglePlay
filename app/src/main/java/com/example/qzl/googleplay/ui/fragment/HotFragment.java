@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.qzl.googleplay.http.protovol.HotProtocol;
+import com.example.qzl.googleplay.http.protocol.HotProtocol;
 import com.example.qzl.googleplay.ui.view.FlowLayout;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.DrawableUtils;

@@ -1,4 +1,4 @@
-package com.example.qzl.googleplay.http.protovol;
+package com.example.qzl.googleplay.http.protocol;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -6,13 +6,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 /**
- * 推荐加载数据
+ * 排行加载数据
  * Created by Qzl on 2016-08-08.
  */
-public class RecommendProtocol extends BaseProtocol<ArrayList<String>> {
+public class HotProtocol extends BaseProtocol<ArrayList<String>> {
     @Override
     public String getKey() {
-        return "recommend";
+        return "hot";
     }
 
     @Override

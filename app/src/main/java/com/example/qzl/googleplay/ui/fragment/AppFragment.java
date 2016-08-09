@@ -3,7 +3,7 @@ package com.example.qzl.googleplay.ui.fragment;
 import android.view.View;
 
 import com.example.qzl.googleplay.domian.AppInfo;
-import com.example.qzl.googleplay.http.protovol.AppProtocol;
+import com.example.qzl.googleplay.http.protocol.AppProtocol;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.AppHolder;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
@@ -41,7 +41,7 @@ public class AppFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<AppInfo> getHolder() {
+        public BaseHolder<AppInfo> getHolder(int position) {
             return new AppHolder();
         }
 
