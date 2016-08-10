@@ -20,5 +20,12 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
     </FrameLayout>
-
+    <!--HorizontalScrollView : 水平滑动的ScrollView-->
+    <HorizontalScrollView
+        android:id="@+id/hsv_detail_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cccccc"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
 </LinearLayout>

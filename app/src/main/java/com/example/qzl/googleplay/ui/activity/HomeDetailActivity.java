@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 
 import com.example.qzl.googleplay.R;
 import com.example.qzl.googleplay.domian.AppInfo;
 import com.example.qzl.googleplay.http.protocol.HomeDetailProtocol;
 import com.example.qzl.googleplay.ui.holder.DeatilSafeHolder;
 import com.example.qzl.googleplay.ui.holder.DetailAppInfoHolder;
+import com.example.qzl.googleplay.ui.holder.DetailPicHolder;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.UIUtils;
 
@@ -62,6 +64,12 @@ public class HomeDetailActivity extends AppCompatActivity {
         flDetailSafe.addView(safeHolder.getRootView());
         //设置数据
         safeHolder.setData(mData);
+
+        //初始化截图模块
+        HorizontalScrollView hscPic = (HorizontalScrollView) view.findViewById(R.id.hsv_detail_pic);
+        DetailPicHolder picHolder = new DetailPicHolder();
+        hscPic.addView(picHolder.getRootView());
+        picHolder.setData(mData);
         return view;
     }
 
