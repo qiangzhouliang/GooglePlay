@@ -11,6 +11,7 @@ import com.example.qzl.googleplay.domian.AppInfo;
 import com.example.qzl.googleplay.http.protocol.HomeDetailProtocol;
 import com.example.qzl.googleplay.ui.holder.DeatilSafeHolder;
 import com.example.qzl.googleplay.ui.holder.DetailAppInfoHolder;
+import com.example.qzl.googleplay.ui.holder.DetailDesHolder;
 import com.example.qzl.googleplay.ui.holder.DetailPicHolder;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.UIUtils;
@@ -70,6 +71,12 @@ public class HomeDetailActivity extends AppCompatActivity {
         DetailPicHolder picHolder = new DetailPicHolder();
         hscPic.addView(picHolder.getRootView());
         picHolder.setData(mData);
+
+        //初始化描述模块
+        FrameLayout flDetailDes = (FrameLayout) view.findViewById(R.id.fl_detail_des);
+        DetailDesHolder detailDesHolder = new DetailDesHolder();
+        flDetailDes.addView(detailDesHolder.getRootView());
+        detailDesHolder.setData(mData);
         return view;
     }
 
