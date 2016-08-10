@@ -48,14 +48,14 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
         RelativeLayout.LayoutParams llParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //设置内边距
         int padding = UIUtils.dip2px(10);
-        mLlContainer.setPadding(padding,padding,padding,padding);
+        mLlContainer.setPadding(padding, padding, padding, padding);
 
         //添加规则，设置展示位置
         llParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);//底部对其
         llParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);//右对齐
 
         //添加布局
-        rlRoot.addView(mLlContainer,llParams);
+        rlRoot.addView(mLlContainer, llParams);
         return rlRoot;
     }
 
@@ -72,10 +72,10 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
             point.setImageResource(R.drawable.indicator_normal);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            if (i == 0){
+            if (i == 0) {
                 //第一个默认选中
                 point.setImageResource(R.drawable.indicator_selected);
-            }else {
+            } else {
                 params.leftMargin = UIUtils.dip2px(4);
             }
             point.setLayoutParams(params);
@@ -92,7 +92,7 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
             @Override
             public void onPageSelected(int position) {
                 position = position % data.size();
-                //当前点备选中
+                //当前点被选中
                 ImageView point = (ImageView) mLlContainer.getChildAt(position);
                 point.setImageResource(R.drawable.indicator_selected);
 

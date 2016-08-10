@@ -1,9 +1,12 @@
 package com.example.qzl.googleplay.ui.fragment;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.example.qzl.googleplay.domian.AppInfo;
 import com.example.qzl.googleplay.http.protocol.HomeProtocal;
+import com.example.qzl.googleplay.ui.activity.HomeDetailActivity;
 import com.example.qzl.googleplay.ui.adapter.MyBaseAdapter;
 import com.example.qzl.googleplay.ui.holder.BaseHolder;
 import com.example.qzl.googleplay.ui.holder.HomeHeaderHolder;
@@ -38,6 +41,18 @@ public class HomeFragment extends BaseFragment {
         if (mPicteureList != null){
             header.setData(mPicteureList);
         }
+
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AppInfo info = data.get(position - 1);//去掉头布局
+                if (info != null) {
+                    Intent intent = new Intent(UIUtils.getContext(), HomeDetailActivity.class);
+                    intent.putExtra("packageName",info.packageName);
+                    startActivity(intent);
+                }
+            }
+        });
         return view;
     }
 
