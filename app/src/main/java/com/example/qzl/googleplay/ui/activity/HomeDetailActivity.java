@@ -1,7 +1,9 @@
 package com.example.qzl.googleplay.ui.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
@@ -46,6 +48,29 @@ public class HomeDetailActivity extends AppCompatActivity {
         mPackageName = getIntent().getStringExtra("packageName");
         //开始加载网络数据
         mLoadingPage.loadData();
+
+        initActionBar();
+    }
+
+    //初始化actionBar
+    private void initActionBar(){
+        // 获取actionbar对象
+        ActionBar actionBar = getSupportActionBar();
+        // 左上角显示logo
+        actionBar.setHomeButtonEnabled(true);//home处可以点击
+        //actionBar.setDisplayShowHomeEnabled(true);//显示图标
+        actionBar.setDisplayHomeAsUpEnabled(true);//显示左上角返回键，当和侧边栏结合时，显示三个杠图片
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public View onCreateSuccessView(){

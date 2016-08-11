@@ -5,6 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
 
 import com.example.qzl.googleplay.R;
 import com.example.qzl.googleplay.ui.fragment.BaseFragment;
@@ -22,6 +26,8 @@ public class MainActivity extends BaseActivity {
     private ViewPager mViewPager;
     private MyAdapter mAdapter;
     private String[] mTabNames;//加载页签标题的数组
+    private ActionBarDrawerToggle mToggle;//抽屉的开关
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,8 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer);
+        initActionBar();
     }
 
     /**
@@ -81,5 +89,31 @@ public class MainActivity extends BaseActivity {
         public int getCount() {
             return mTabNames.length;
         }
+    }
+
+    //初始化actionBar
+    private void initActionBar(){
+        // 获取actionbar对象
+        ActionBar actionBar = getSupportActionBar();
+        // 左上角显示logo
+        actionBar.setHomeButtonEnabled(true);//home处可以点击
+        //actionBar.setDisplayShowHomeEnabled(true);//显示图标
+        actionBar.setDisplayHomeAsUpEnabled(true);//显示左上角返回键，当和侧边栏结合时，显示三个杠图片
+
+        //初始化抽屉的开关
+        //参二是：抽屉对象，参三是左上角抽屉对象，参四：打开侧边栏描述，参五：关闭侧边栏描述(V4包)
+        mToggle = new ActionBarDrawerToggle(this,mDrawer,R.drawable.ic_drawer_am, R.string.drawer_open,R.string.drawer_close);
+        mToggle.syncState();//同步状态，将drawLayout和开关关联在一起
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                //切换抽屉
+                mToggle.onOptionsItemSelected(item);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
