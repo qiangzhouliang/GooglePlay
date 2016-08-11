@@ -14,6 +14,7 @@ import com.example.qzl.googleplay.http.protocol.HomeDetailProtocol;
 import com.example.qzl.googleplay.ui.holder.DeatilSafeHolder;
 import com.example.qzl.googleplay.ui.holder.DetailAppInfoHolder;
 import com.example.qzl.googleplay.ui.holder.DetailDesHolder;
+import com.example.qzl.googleplay.ui.holder.DetailDownloadHolder;
 import com.example.qzl.googleplay.ui.holder.DetailPicHolder;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
 import com.example.qzl.googleplay.utils.UIUtils;
@@ -102,6 +103,12 @@ public class HomeDetailActivity extends AppCompatActivity {
         DetailDesHolder detailDesHolder = new DetailDesHolder();
         flDetailDes.addView(detailDesHolder.getRootView());
         detailDesHolder.setData(mData);
+
+        //初始化下载模块
+        FrameLayout flDetailDownload = (FrameLayout) view.findViewById(R.id.fl_detail_download);
+        DetailDownloadHolder downloadHolder = new DetailDownloadHolder();
+        flDetailDownload.addView(downloadHolder.getRootView());
+        downloadHolder.setData(mData);
         return view;
     }
 
