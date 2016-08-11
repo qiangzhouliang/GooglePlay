@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qzl.googleplay.http.protocol.HotProtocol;
-import com.example.qzl.googleplay.ui.view.FlowLayout;
 import com.example.qzl.googleplay.ui.view.LoadingPage;
+import com.example.qzl.googleplay.ui.view.MyFlowLayout;
 import com.example.qzl.googleplay.utils.DrawableUtils;
 import com.example.qzl.googleplay.utils.UIUtils;
 
@@ -30,11 +30,14 @@ public class HotFragment extends BaseFragment {
     public View onCreateSuccessView() {
         //支持上下滑动
         ScrollView scrollView = new ScrollView(UIUtils.getContext());
-        FlowLayout flow = new FlowLayout(UIUtils.getContext());
+//        FlowLayout flow = new FlowLayout(UIUtils.getContext());
+        MyFlowLayout flow = new MyFlowLayout(UIUtils.getContext());
         int padding = UIUtils.dip2px(10);
         flow.setPadding(padding,padding,padding,padding);//设置内边距
-        flow.setHorizontalSpacing(UIUtils.dip2px(6));//水平间距
-        flow.setVerticalSpacing(8);//竖直间距
+
+        //flow.setHorizontalSpacing(UIUtils.dip2px(6));//水平间距
+        //flow.setVerticalSpacing(8);//竖直间距
+
         for (int i = 0; i < mData.size(); i++) {
             final String keyword = mData.get(i);
             TextView view = new TextView(UIUtils.getContext());

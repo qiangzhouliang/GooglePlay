@@ -82,7 +82,7 @@ public class DetailDesHolder extends BaseHolder<AppInfo> {
                 public void onAnimationEnd(Animator animator) {
                     //ScrollView要滑动到最低部
                     final ScrollView scrollView = getScrollView();
-                    //为了运行更加安全和稳定，可以将滑动到底部方法放到消息队列中执行
+                    //为了运行更加安全和稳定，可以将滑动到底部方法放到消息队列中执行，运行在主线程
                     scrollView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -116,12 +116,17 @@ public class DetailDesHolder extends BaseHolder<AppInfo> {
         mTvDes.setText(data.des);
         mTvAuthor.setText(data.author);
 
-        //设置默认显示七行的高度值
-        int shortHeight = getShortHeight();
-        mParams = (LinearLayout.LayoutParams) mTvDes.getLayoutParams();
-        mParams.height = shortHeight;
-        mTvDes.setLayoutParams(mParams);
-
+        //让他跑到消息队列里面，解决当只有三行描述时也是7行高度的bug
+        mTvDes.post(new Runnable() {
+            @Override
+            public void run() {
+                //设置默认显示七行的高度值
+                int shortHeight = getShortHeight();
+                mParams = (LinearLayout.LayoutParams) mTvDes.getLayoutParams();
+                mParams.height = shortHeight;
+                mTvDes.setLayoutParams(mParams);
+            }
+        });
     }
     //获取7行textView的高度
     public int getShortHeight(){
